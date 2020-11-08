@@ -52,6 +52,7 @@ var startBtn = document.querySelector("#start-btn");
 var questionContent = document.querySelector("#intro-wrapper");
 var counter = 0;
 var currentTime = 75;
+var highScores = [];
 
 var startQuiz = function()
 {
@@ -119,21 +120,36 @@ var createQuiz = function()
 
 };
 
+var removeAll = function(choiceA, choiceB, choiceC, choiceD, question) {
+    choiceA.remove();
+    choiceB.remove();
+    choiceC.remove();
+    choiceD.remove();
+    question.remove();
+};
 var checkAnswer = function(choice, choiceA, choiceB, choiceC, choiceD, question)
 {
     if(quizQuestions[counter].answer === choice)
     {
-        alert("You are correct");
+        // alert("You are correct");
     }
     else
     {
-        alert("You are incorrect");
+        // alert("You are incorrect");
         currentTime = currentTime - 6;
     }
     counter++;
 
     removeAll(choiceA, choiceB, choiceC, choiceD, question);
-    createQuiz();
+    if(counter < 5)
+    {
+        createQuiz();
+    }
+    else
+    {
+        endQuiz();
+    }
+    
 };
 
 var endQuiz = function()
@@ -145,6 +161,7 @@ var endQuiz = function()
 
     var intInput = document.createElement("input");
     intInput.className = "int-input";
+    intInput.setAttribute("name", "player-initials");
     intInput.setAttribute("placeholder", "Initial Here");
     questionContent.appendChild(intInput);
 
@@ -153,7 +170,42 @@ var endQuiz = function()
     intSubmit.textContent = "Submit";
     intSubmit.setAttribute("type", "submit" )
     questionContent.appendChild(intSubmit);
+
+    intSubmit.addEventListener("click", savedScore);
 };
+
+var savedScore = function() 
+{
+    var int = document.querySelector("input[name='player-initials']").value;
+
+    if(!int)
+    {
+        alert("ENTER INITIALS!");
+
+    }
+    else
+    {
+        var scoreItems = 
+        {
+            initials: int,
+            score: currentTime
+        }
+        highScores.push(scoreItems);
+        localStorage.setItem("scores", JSON.stringify(highScores));
+    }
+};
+
+var loadScores = function()
+{
+    highScores = localStorage.getItem("scores");
+
+    if (!highScores)
+    {
+        highScores = [];
+        return false;
+    }
+    highScores = JSON.parse(highScores);
+}
 
 var timer = function()
 {
@@ -167,21 +219,14 @@ var timer = function()
         else
         {
             clearInterval(timeInterval);
-            endQuiz();
         }
     }, 1000);
 };
 
 
-
+loadScores();
 startBtn.addEventListener("click", startQuiz);
 
 
-var removeAll = function(choiceA, choiceB, choiceC, choiceD, question) {
-    choiceA.remove();
-    choiceB.remove();
-    choiceC.remove();
-    choiceD.remove();
-    question.remove();
-};
+
 
