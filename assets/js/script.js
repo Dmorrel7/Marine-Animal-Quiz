@@ -46,6 +46,7 @@ var quizQuestions =
     }
 ];
 
+var scoreContainer = document.getElementById("form-input")
 var timerEl = document.querySelector(".score")
 var startBtn = document.querySelector("#start-btn");
 var questionContent = document.querySelector("#intro-wrapper");
@@ -135,10 +136,24 @@ var checkAnswer = function(choice, choiceA, choiceB, choiceC, choiceD, question)
     createQuiz();
 };
 
-// var endQuiz = function()
-// {
-//     document
-// };
+var endQuiz = function()
+{
+    var scoreInput = document.createElement("h2");
+    scoreInput.className = "score-container";
+    scoreInput.textContent = "Enter Your Initials";
+    questionContent.appendChild(scoreInput);
+
+    var intInput = document.createElement("input");
+    intInput.className = "int-input";
+    intInput.setAttribute("placeholder", "Initial Here");
+    questionContent.appendChild(intInput);
+
+    var intSubmit = document.createElement("button");
+    intSubmit.className = "int-submit-btn";
+    intSubmit.textContent = "Submit";
+    intSubmit.setAttribute("type", "submit" )
+    questionContent.appendChild(intSubmit);
+};
 
 var timer = function()
 {
@@ -152,6 +167,7 @@ var timer = function()
         else
         {
             clearInterval(timeInterval);
+            endQuiz();
         }
     }, 1000);
 };
