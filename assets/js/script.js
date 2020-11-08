@@ -57,6 +57,7 @@ var startQuiz = function()
     //clear Welcome content
     var clearTitle = document.getElementById("intro");
     clearTitle.remove();
+    timer();
     createQuiz();
 };
 
@@ -126,6 +127,7 @@ var checkAnswer = function(choice, choiceA, choiceB, choiceC, choiceD, question)
     else
     {
         alert("You are incorrect");
+        currentTime = currentTime - 6;
     }
     counter++;
 
@@ -133,15 +135,25 @@ var checkAnswer = function(choice, choiceA, choiceB, choiceC, choiceD, question)
     createQuiz();
 };
 
+// var endQuiz = function()
+// {
+//     document
+// };
+
 var timer = function()
 {
     var timeInterval = setInterval(function()
     {
         if(currentTime > 0 && counter < 5)
         {
-            timerEl
+            timerEl.textContent = "Time remaining:" + currentTime;
+            currentTime--
         }
-    });
+        else
+        {
+            clearInterval(timeInterval);
+        }
+    }, 1000);
 };
 
 
