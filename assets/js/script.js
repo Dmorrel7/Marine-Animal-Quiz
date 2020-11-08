@@ -46,39 +46,11 @@ var quizQuestions =
     }
 ];
 
+var timerEl = document.querySelector(".score")
 var startBtn = document.querySelector("#start-btn");
-var questionContent = document.querySelector("#intro");
+var questionContent = document.querySelector("#intro-wrapper");
 var counter = 0;
 var currentTime = 75;
-
-
-var createQuiz = function()
-{   
-    var question = document.createElement("h2");
-    question.className = "question-head";
-    question.textContent = quizQuestions[counter].question;
-    questionContent.appendChild(question);
-
-    var choiceA = document.createElement("button");
-    choiceA.className = "quiz-btn";
-    choiceA.textContent = quizQuestions[counter].choiceA;
-    questionContent.appendChild(choiceA);
-
-    var choiceB = document.createElement("button");
-    choiceB.className = "quiz-btn";
-    choiceB.textContent = quizQuestions[counter].choiceB;
-    questionContent.appendChild(choiceB);
-
-    var choiceC = document.createElement("button");
-    choiceC.className = "quiz-btn";
-    choiceC.textContent = quizQuestions[counter].choiceC;
-    questionContent.appendChild(choiceC);
-
-    var choiceD = document.createElement("button");
-    choiceD.className = "quiz-btn";
-    choiceD.textContent = quizQuestions[counter].choiceD;
-    questionContent.appendChild(choiceD);
-};
 
 var startQuiz = function()
 {
@@ -86,7 +58,102 @@ var startQuiz = function()
     var clearTitle = document.getElementById("intro");
     clearTitle.remove();
     createQuiz();
-}
+};
+
+
+var createQuiz = function()
+{   // creates question
+    var question = document.createElement("h2");
+    question.id = "question";
+    question.className = "question";
+    question.textContent = quizQuestions[counter].question;
+    questionContent.appendChild(question);
+
+    // creates choiceA
+    var choiceA = document.createElement("button");
+    choiceA.id = "quiz-btnA";
+    choiceA.className = "quiz-btn";
+    choiceA.textContent = quizQuestions[counter].choiceA;
+    questionContent.appendChild(choiceA);
+
+    choiceA.addEventListener("click", () =>{
+        checkAnswer("choiceA", choiceA, choiceB, choiceC, choiceD, question);
+    });
+
+
+    // creates choiceB
+    var choiceB = document.createElement("button");
+    choiceB.id = "quiz-btnB";
+    choiceB.className = "quiz-btn";
+    choiceB.textContent = quizQuestions[counter].choiceB;
+    questionContent.appendChild(choiceB);
+
+    choiceB.addEventListener("click", () =>{
+        checkAnswer("choiceB", choiceA, choiceB, choiceC, choiceD, question);
+    });
+
+
+    // creates choiceC
+    var choiceC = document.createElement("button");
+    choiceC.id = "quiz-btnC"
+    choiceC.className = "quiz-btn";
+    choiceC.textContent = quizQuestions[counter].choiceC;
+    questionContent.appendChild(choiceC);
+
+    choiceC.addEventListener("click", () =>{
+        checkAnswer("choiceC", choiceA, choiceB, choiceC, choiceD, question);
+    });
+
+    // creates choiceD
+    var choiceD = document.createElement("button");
+    choiceD.id = "quiz-btnD";
+    choiceD.className = "quiz-btn";
+    choiceD.textContent = quizQuestions[counter].choiceD;
+    questionContent.appendChild(choiceD);
+
+    choiceD.addEventListener("click", () =>{
+        checkAnswer("choiceD", choiceA, choiceB, choiceC, choiceD, question);
+    });
+
+};
+
+var checkAnswer = function(choice, choiceA, choiceB, choiceC, choiceD, question)
+{
+    if(quizQuestions[counter].answer === choice)
+    {
+        alert("You are correct");
+    }
+    else
+    {
+        alert("You are incorrect");
+    }
+    counter++;
+
+    removeAll(choiceA, choiceB, choiceC, choiceD, question);
+    createQuiz();
+};
+
+var timer = function()
+{
+    var timeInterval = setInterval(function()
+    {
+        if(currentTime > 0 && counter < 5)
+        {
+            timerEl
+        }
+    });
+};
+
+
 
 startBtn.addEventListener("click", startQuiz);
+
+
+var removeAll = function(choiceA, choiceB, choiceC, choiceD, question) {
+    choiceA.remove();
+    choiceB.remove();
+    choiceC.remove();
+    choiceD.remove();
+    question.remove();
+};
 
