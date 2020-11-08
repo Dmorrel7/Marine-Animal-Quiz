@@ -205,7 +205,7 @@ var loadScores = function()
         return false;
     }
     highScores = JSON.parse(highScores);
-}
+};
 
 var timer = function()
 {
