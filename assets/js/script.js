@@ -72,14 +72,17 @@ var createQuiz = function()
     question.textContent = quizQuestions[counter].question;
     questionContent.appendChild(question);
 
-    
+    //creates div to put buttons into
+    var answerContainer = document.createElement("div");
+    answerContainer.className = "answer-container";
+    questionContent.appendChild(answerContainer);    
 
     // creates choiceA
     var choiceA = document.createElement("button");
     choiceA.id = "quiz-btnA";
     choiceA.className = "quiz-btn";
     choiceA.textContent = quizQuestions[counter].choiceA;
-    questionContent.appendChild(choiceA);
+    answerContainer.appendChild(choiceA);
 
     choiceA.addEventListener("click", () =>{
         checkAnswer("choiceA", choiceA, choiceB, choiceC, choiceD, question);
@@ -91,7 +94,7 @@ var createQuiz = function()
     choiceB.id = "quiz-btnB";
     choiceB.className = "quiz-btn";
     choiceB.textContent = quizQuestions[counter].choiceB;
-    questionContent.appendChild(choiceB);
+    answerContainer.appendChild(choiceB);
 
     choiceB.addEventListener("click", () =>{
         checkAnswer("choiceB", choiceA, choiceB, choiceC, choiceD, question);
@@ -103,7 +106,7 @@ var createQuiz = function()
     choiceC.id = "quiz-btnC"
     choiceC.className = "quiz-btn";
     choiceC.textContent = quizQuestions[counter].choiceC;
-    questionContent.appendChild(choiceC);
+    answerContainer.appendChild(choiceC);
 
     choiceC.addEventListener("click", () =>{
         checkAnswer("choiceC", choiceA, choiceB, choiceC, choiceD, question);
@@ -114,13 +117,14 @@ var createQuiz = function()
     choiceD.id = "quiz-btnD";
     choiceD.className = "quiz-btn";
     choiceD.textContent = quizQuestions[counter].choiceD;
-    questionContent.appendChild(choiceD);
+    answerContainer.appendChild(choiceD);
 
     choiceD.addEventListener("click", () =>{
         checkAnswer("choiceD", choiceA, choiceB, choiceC, choiceD, question);
     });
 };
 
+// remove questions to iterate through rest
 var removeAll = function(choiceA, choiceB, choiceC, choiceD, question) {
     choiceA.remove();
     choiceB.remove();
@@ -132,11 +136,11 @@ var checkAnswer = function(choice, choiceA, choiceB, choiceC, choiceD, question)
 {
     if(quizQuestions[counter].answer === choice)
     {
-        // alert("CORRECT!");
+         alert("CORRECT!");
     }
     else
     {
-        //  alert("INCORRECT!");
+          alert("INCORRECT!");
         currentTime = currentTime - 6;
     }
     counter++;

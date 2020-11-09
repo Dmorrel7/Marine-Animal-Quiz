@@ -33,12 +33,20 @@ var compare = function(a, b)
 
 var outputScore = function()
 {
+    var scoreContainerEl = document.querySelector(".intro-wrapper");
+
+    var scoreContainer = document.createElement("div");
+    scoreContainer.className = "answer-container";
+    scoreContainerEl.appendChild(scoreContainer);
+
     for(var i = 0; i < highScores.length; i++)
     {
+        
+
         var playerNames = document.createElement("h3");
         playerNames.className = "playerName";
         playerNames.textContent = highScores[i].initials +" : " + highScores[i].score;
-        scoreDiv.appendChild(playerNames);
+        scoreContainer.appendChild(playerNames);
 
         
     }
