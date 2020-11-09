@@ -72,6 +72,8 @@ var createQuiz = function()
     question.textContent = quizQuestions[counter].question;
     questionContent.appendChild(question);
 
+    
+
     // creates choiceA
     var choiceA = document.createElement("button");
     choiceA.id = "quiz-btnA";
@@ -117,7 +119,6 @@ var createQuiz = function()
     choiceD.addEventListener("click", () =>{
         checkAnswer("choiceD", choiceA, choiceB, choiceC, choiceD, question);
     });
-
 };
 
 var removeAll = function(choiceA, choiceB, choiceC, choiceD, question) {
@@ -131,11 +132,11 @@ var checkAnswer = function(choice, choiceA, choiceB, choiceC, choiceD, question)
 {
     if(quizQuestions[counter].answer === choice)
     {
-        // alert("You are correct");
+        // alert("CORRECT!");
     }
     else
     {
-        // alert("You are incorrect");
+        //  alert("INCORRECT!");
         currentTime = currentTime - 6;
     }
     counter++;

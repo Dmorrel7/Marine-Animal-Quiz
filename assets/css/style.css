@@ -7,20 +7,21 @@
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     line-height: 1.3;
+    background-image: url("../images/ocean-background.jpg");
+    background-size: cover;
+    color: white;
 }
-
+/* Header */
 header {
     display: flex;
     justify-content: space-around;
-    border: 2px solid blue;
     width: 50%;
     margin: 50px auto 30px auto;
     padding: 20px;
     border-radius: 10px;
 }
-
+/* Main */
 .intro-wrapper {
-    border: 2px solid blue;
     width: 50%;
     margin: auto;
     padding: 30px;
@@ -35,7 +36,39 @@ header {
     width: 100%;
 }
 
-#start-btn {
+#start-btn, #play-again {
     width: 100px;
+    border-radius: 10px;
+}
+/* footer*/
+footer {
+    display: flex;
+    width: 50%;
+    margin: 50px auto 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+}
+/* Quiz styles */
+.quiz-btn {
+    display: flex;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 250px;
+    font-weight: bold;
+    justify-content: center;
+}
+
+/* End game */
+
+.work {
+    text-align: center;
 }
 
